@@ -110,7 +110,7 @@ namespace DepartmentsWebApi.Controllers
                 var file = httpRequest.Files[0];
                 var path = env.ContentRootPath + "/Photos/" + file.FileName;
 
-                using (var fs = new FileStream(path, FileMode.CreateNew))
+                using (var fs = new FileStream(path, FileMode.Create))
                 {
                     file.CopyTo(fs);
                 }
