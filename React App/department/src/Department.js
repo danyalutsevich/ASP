@@ -20,24 +20,24 @@ export class Department extends Component {
         this.refreshList();
     }
 
-    changeName =(e)=>{
-        this.setState({Name:e.target.value});
+    changeName = (e) => {
+        this.setState({ Name: e.target.value });
     }
 
     addClick() {
         this.setState({
-            modalTitle:"Add Department",
-            Id:0,
-            Name:""
+            modalTitle: "Add Department",
+            Id: 0,
+            Name: ""
         })
 
     }
 
     editClick(dep) {
         this.setState({
-            modalTitle:"Edit Department",
-            Id:dep.Id,
-            Name:dep.Name
+            modalTitle: "Edit Department",
+            Id: dep.Id,
+            Name: dep.Name
         })
     }
 
@@ -55,7 +55,7 @@ export class Department extends Component {
                 <button type="button" className="btn btn-primary m-2 float-end"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
-                    onClick={()=>this.addClick()}>Add Department</button>
+                    onClick={() => this.addClick()}>Add Department</button>
 
                 <table className="table table-striped">
                     <thead>
@@ -75,7 +75,7 @@ export class Department extends Component {
                                     <button type="button" className="btn btn-light mr-1"
                                         data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
-                                        onClick={()=>this.editClick(dep)}>
+                                        onClick={() => this.editClick(dep)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pen" viewBox="0 0 16 16">
                                             <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
                                         </svg>
@@ -98,19 +98,19 @@ export class Department extends Component {
                                 <h5 className="modal-title">{modalTitle}</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
-                                <div className="modal-body">
-                                    <div className="input-group mb-3">
-                                        <span className="input-group-text">Name</span>
-                                        <input type="text" className="form-control" value={Name} onChange={this.changeName} />
-                                    </div>
-                                    {Id == 0 ?
-                                        <button type="button" className="btn btn-primary float-start">Create</button>
-                                        : null}
-                                    {Id != 0 ?
-                                        <button type="button" className="btn btn-primary float-start">Update</button>
-                                        : null}
-
+                            </div>
+                            <div className="modal-body">
+                                <div className="input-group mb-3">
+                                    <span className="input-group-text">Name</span>
+                                    <input type="text" className="form-control" value={Name} onChange={this.changeName} />
                                 </div>
+                                {Id == 0 ?
+                                    <button type="button" className="btn btn-primary float-start">Create</button>
+                                    : null}
+                                {Id != 0 ?
+                                    <button type="button" className="btn btn-primary float-start">Update</button>
+                                    : null}
+
                             </div>
                         </div>
                     </div>
