@@ -9,12 +9,14 @@ CREATE TABLE Employee (
 
 
 INSERT INTO Employee VALUES(
-	'Lisa',
-	'Sales',
-	'2022-06-24',
-	'userpic.png'
+	'Ann',
+	'Designers',
+	'2022-03-03',
+	'spic.png'
 )
 
 SELECT * FROM Employee
+
+
 
 

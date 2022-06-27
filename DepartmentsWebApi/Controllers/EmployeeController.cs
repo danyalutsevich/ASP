@@ -1,9 +1,12 @@
 ﻿using DepartmentsWebApi.Model;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DepartmentsWebApi.Controllers
 {
@@ -13,10 +16,12 @@ namespace DepartmentsWebApi.Controllers
     {
 
         private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment env;
 
-        public EmployeeController(IConfiguration configuration)
+        public EmployeeController(IConfiguration configuration, IWebHostEnvironment env)
         {
             this.configuration = configuration;
+            this.env = env;
         }
 
         [HttpGet]
@@ -88,13 +93,36 @@ namespace DepartmentsWebApi.Controllers
                 using (SqlCommand command = new SqlCommand("DELETE FROM Employee WHERE Id = @Id", connection))
                 {
 
-                    command.Parameters.AddWithValue("@Id",id);
+                    command.Parameters.AddWithValue("@Id", id);
                     command.ExecuteNonQuery();
                 }
             }
             return new JsonResult("Deleted");
         }
-    
+
+        [Route("SaveFile")]
+        [HttpPost]
+        public JsonResult SaveFile()
+        {
+            try
+            {
+                var httpRequest = Request.Form;
+                var file = httpRequest.Files[0];
+                var path = env.ContentRootPath + "/Photos/" + file.FileName;
+
+                using (var fs = new FileStream(path, FileMode.CreateNew))
+                {
+                    file.CopyTo(fs);
+                }
+
+                return new JsonResult("FileSaved");
+
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(ex.Message);
+            }
+        }
 
     }
 }
