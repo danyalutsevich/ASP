@@ -7,6 +7,8 @@ export class Department extends Component {
         super(props);
         this.state = {
             departments: [],
+            Name: '',
+            Id: 0
         }
     }
 
@@ -39,6 +41,50 @@ export class Department extends Component {
             Id: dep.Id,
             Name: dep.Name
         })
+    }
+
+    createClick() {
+        fetch(varialbes.API_URL + 'department', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                Name: this.state.Name
+            })
+        })
+            .then(res => res.json())
+            .then((res) => {
+                alert(res);
+                this.refreshList();
+            }, (error) => {
+                alert("Failed to create department");
+            })
+    }
+
+    updateClick() {
+
+        fetch(varialbes.API_URL + 'department', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                Name: this.state.Name,
+                Id: this.state.Id
+            })
+        })
+            .then(res => res.json())
+            .then((res) => {
+                alert(res)
+                this.refreshList()
+            },
+                (error) => {
+                    alert('Failed to update department')
+                })
+
     }
 
     render() {
@@ -105,10 +151,11 @@ export class Department extends Component {
                                     <input type="text" className="form-control" value={Name} onChange={this.changeName} />
                                 </div>
                                 {Id == 0 ?
-                                    <button type="button" className="btn btn-primary float-start">Create</button>
+                                    <button type="button" className="btn btn-primary float-start" onClick={
+                                        () => { this.createClick() }}>Create</button>
                                     : null}
                                 {Id != 0 ?
-                                    <button type="button" className="btn btn-primary float-start">Update</button>
+                                    <button type="button" className="btn btn-primary float-start" onClick={() => { this.updateClick() }}>Update</button>
                                     : null}
 
                             </div>

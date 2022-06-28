@@ -28,7 +28,7 @@ namespace DepartmentsWebApi.Controllers
                 connection.Open();
 
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Departments", connection))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Departments ORDER BY 1", connection))
                 {
                     var reader = command.ExecuteReader();
 
