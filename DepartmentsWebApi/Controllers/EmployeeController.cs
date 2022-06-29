@@ -115,7 +115,7 @@ namespace DepartmentsWebApi.Controllers
                     file.CopyTo(fs);
                 }
 
-                return new JsonResult("FileSaved");
+                return new JsonResult(file.FileName);
 
             }
             catch (Exception ex)
